@@ -1,0 +1,33 @@
+Create two single node cluster in two different Availability zone
+====================================================================
+
+Availability zone-A
+
+sudo nano /usr/local/hadoop/conf/core-site.xml
+
+<property>
+<name>fs.default.name</name>
+<value>hdfs://ip-172-31-24-113.us-west-2.compute.internal:8020</value>
+</property>
+--------------------------------------------------------------------------------------
+Availability zone-B
+
+<property>
+<name>fs.default.name</name>
+<value>hdfs://ip-172-31-33-100.us-west-2.compute.internal:8020</value>
+</property>
+
+
+-------------------------------------------------------------------------------------------------
+sudo nano /etc/hosts
+localhost 127.0.0.1		(Thereis No host Entry)
+
+
+-----------------------------------------------------------------------------------------------------
+wget https://archive.apache.org/dist/hadoop/common/current2/hadoop-2.5.2-src.tar.gz			(Download from apache-any file)
+hadoop fs -put hadoop-2.5.2-src.tar.gz /								(move this file to hdfs)
+
+
+hadoop distcp hdfs://ip-172-31-33-100.us-west-2.compute.internal:8020/hadoop-2.5.2-src.tar.gz hdfs://ip-172-31-24-113.us-west-2.compute.internal:8020/user/ubuntu/
+
+hadoop distcp hdfs://ip-172-31-24-113.us-west-2.compute.internal:8020/hadoop-1.2.1.tar.gz hdfs://ip-172-31-33-100.us-west-2.compute.internal:8020/user/ubuntu/
