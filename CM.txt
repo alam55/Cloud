@@ -1,0 +1,61 @@
+
+
+
+ip-172-31-8-198.us-west-2.compute.internal
+ip-172-31-0-190.us-west-2.compute.internal
+ip-172-31-0-66.us-west-2.compute.internal
+
+ip-172-31-6-212.us-west-2.compute.internal
+
+===================================
+*********************************
+===================================
+
+sudo apt-get install dsh -y
+sudo nano /etc/dsh/machines.list
+wget https://s3.amazonaws.com/shaan/My+Self/alam.pem
+chmod 400 alam.pem
+cp alam.pem .ssh
+nano .profile
+eval `ssh-agent` ssh-add /home/ubuntu/.ssh/alam.pem
+source .profile
+dsh -a uptime
+dsh -a sudo apt-get update
+dsh -a sudo apt-get dist-upgrade –y
+dsh -a sudo sysctl -w vm.swappiness=0
+
+====================================
+********************************
+=====================================
+--------------------
+
+On CM:-
+wget http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin
+
+chmod u+x cloudera-manager-installer.bin 
+
+sudo ./cloudera-manager-installer.bin
+
+===========================
+Troubleshooting:-
+
+
+In either case, go to the file /etc/cloudera-scm-server/db.mgmt.properties and check whether all the below 4 hostnames are properly mapped. 
+If not, change it to the appropriate hostname
+
+#vim /etc/cloudera-scm-server/db.mgmt.properties
+#Edit these properties and map to appropriate hostname
+com.cloudera.cmf.ACTIVITYMONITOR.db.host=yourHostname:7432
+com.cloudera.cmf.REPORTSMANAGER.db.host=yourHostname:7432
+com.cloudera.cmf.NAVIGATOR.db.host=yourHostname:7432
+com.cloudera.cmf.NAVIGATORMETASERVER.db.host=yourHostname:7432
+
+sudo service cloudera-scm-server restart	
+
+
+
+
+
+
+#https://community.cloudera.com/t5/Cloudera-Manager-Installation/Unable-to-connect-to-database-on-host-http-namenode-tarun-com/td-p/11290
+#http://blog.puneethabm.in/step-database-setup-failed-test-connections-cloudera-set-up/
