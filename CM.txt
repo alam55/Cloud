@@ -1,18 +1,14 @@
 
-
-
-ip-172-31-8-198.us-west-2.compute.internal
-ip-172-31-0-190.us-west-2.compute.internal
-ip-172-31-0-66.us-west-2.compute.internal
-
-ip-172-31-6-212.us-west-2.compute.internal
-
-===================================
-*********************************
-===================================
-
+Create 4(any no.) instance
+access cm instance using ppk
+sudo nano /etc/hosts
+	(make all 4 host entry--FQDN)
+	
 sudo apt-get install dsh -y
 sudo nano /etc/dsh/machines.list
+
+(cm,n1,n2,n3)
+
 wget https://s3.amazonaws.com/shaan/My+Self/alam.pem
 chmod 400 alam.pem
 cp alam.pem .ssh
@@ -24,10 +20,6 @@ dsh -a sudo apt-get update
 dsh -a sudo apt-get dist-upgrade –y
 dsh -a sudo sysctl -w vm.swappiness=0
 
-====================================
-********************************
-=====================================
---------------------
 
 On CM:-
 wget http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin
@@ -36,26 +28,16 @@ chmod u+x cloudera-manager-installer.bin
 
 sudo ./cloudera-manager-installer.bin
 
-===========================
-Troubleshooting:-
+
+172.31.25.154	ip-172-31-25-154.us-west-2.compute.internal	cm
+172.31.25.155	ip-172-31-25-155.us-west-2.compute.internal	n1
+172.31.25.153	ip-172-31-25-153.us-west-2.compute.internal	n2
+172.31.25.152	ip-172-31-25-152.us-west-2.compute.internal	n3
+
+172.31.25.154
+172.31.25.155
+172.31.25.153
+172.31.25.152			
+http://archive.cloudera.com/cm4/installer/4.7.0/cloudera-manager-installer.bin
 
 
-In either case, go to the file /etc/cloudera-scm-server/db.mgmt.properties and check whether all the below 4 hostnames are properly mapped. 
-If not, change it to the appropriate hostname
-
-#vim /etc/cloudera-scm-server/db.mgmt.properties
-#Edit these properties and map to appropriate hostname
-com.cloudera.cmf.ACTIVITYMONITOR.db.host=yourHostname:7432
-com.cloudera.cmf.REPORTSMANAGER.db.host=yourHostname:7432
-com.cloudera.cmf.NAVIGATOR.db.host=yourHostname:7432
-com.cloudera.cmf.NAVIGATORMETASERVER.db.host=yourHostname:7432
-
-sudo service cloudera-scm-server restart	
-
-
-
-
-
-
-#https://community.cloudera.com/t5/Cloudera-Manager-Installation/Unable-to-connect-to-database-on-host-http-namenode-tarun-com/td-p/11290
-#http://blog.puneethabm.in/step-database-setup-failed-test-connections-cloudera-set-up/
