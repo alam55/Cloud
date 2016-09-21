@@ -1,0 +1,36 @@
+apt-get install python-pip
+pip install awscli
+----------------------------------------
+Go to
+-->Security Credentials
+-->users
+->Create new users
+-->download credentials
+->selet this user
+->permission
+-->attach Policy
+->Select AdministratorAccess
+->attach policy.
+
+aws configure
+aws s3 ls
+aws s3 ls s3://shaan
+aws s3 mb s3://testing-cloude
+touch test
+aws s3 cp test s3://testing-cloude
+aws s3 ls s3://testing-cloude
+
+========================================================
+
+policy:-
+iamfullaccess
+iamreadonly
+AmazonEc2FullAccess
+codecommit
+codecommitfullaccess
+
+ Alam
+Access Key ID:
+AKIAJUDGJYPXC5XHIVGQ
+Secret Access Key:
+rIkhg2vsxLPTLeQ24LvCGFrCRw1CNanEN0UptHLq
