@@ -1,0 +1,19 @@
+hadoop fs -ls  /user/ubuntu/snapshotdemo/.snapshot/s20160925-233456.815
+wget https://archive.apache.org/dist/hadoop/common/hadoop-2.5.1/hadoop-2.5.1.tar.gz
+hadoop fs -put hadoop-0.20.204.0.tar.gz
+hadoop fs -ls /user/ubuntu
+hadoop fs -mkdir /user/ubuntu/snapshotdemo
+hadoop fs -cp /user/ubuntu/hadoop-0.20.204.0.tar.gz /user/ubuntu/snapshotdemo
+hadoop fs -cp /user/ubuntu/hd /user/ubuntu/snapshotdemo
+hadoop fs -ls /user/ubuntu/snapshotdemo
+hdfs dfsadmin -allowSnapshot /user/ubuntu/snapshotdemo
+hdfs dfs -createSnapshot /user/ubuntu/snapshotdemo
+hadoop fs -ls  /user/ubuntu/snapshotdemo/.snapshot
+hadoop fs -rm -r  /user/ubuntu/snapshotdemo/		(snapshot dir cannot delete, sub dir or file can be deleted)
+hadoop fs -rm -r  /user/ubuntu/snapshotdemo/hd
+hadoop fs -ls  /user/ubuntu/snapshotdemo/		(if we chk there is no hd file)
+hadoop fs -ls  /user/ubuntu/snapshotdemo/.snapshot/	(but snapshot of hd file will be here)
+hadoop fs -cp  /user/ubuntu/snapshotdemo/.snapshot/s20160925-234653.086 /user/ubuntu/snapshotdemo	(recover from .snapshot)
+hadoop fs -ls  /user/ubuntu/snapshotdemo/		(now u can chk file recovered)
+
+ 
